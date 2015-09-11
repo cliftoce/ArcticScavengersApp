@@ -1,0 +1,63 @@
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0; 
+}
+
+/**
+ * Basic styling
+ */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  line-height: 1.5em;
+  font-weight: 300;
+  text-align: center;
+  color: #111;
+  background: #fdfdfd;
+  -webkit-text-size-adjust: 100%; 
+}
+
+/**
+* Center content on page
+*/
+#container {
+	margin: 0 auto;
+	width: 960px;
+	text-align: left;
+	padding: 10px;
+	background-color: #CCFFFF;
+	border: 1px solid black; border-top: none;
+}
+
+/**
+ * Set 'margin-bottom' to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+.highlight {
+  margin-bottom: 15px; 
+}
+
+/**
+ * Lists
+ */
+ul, ol {
+  margin-left: 30px; 
+}
+
+li > ul, li > ol {
+  margin-bottom: 0; 
+}
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300; 
+}

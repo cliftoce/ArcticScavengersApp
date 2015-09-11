@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Arctic Scavengers Companion</title>
+  <meta name="description" content="Arctic Scavengers companion – test page.">
+
+  <link rel="stylesheet" type="text/css" href="AScompanion.css">
+  <script type="text/javascript" src="AScompanion.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+
+<body>
+
+  <div id="container">
+
+    <form>
+      Select a&nbsp;
+      <select id="modules">
+        <option>Module</option>
+        <option>HQ1</option>
+        <option>HQ2</option>
+        <option>HQ3</option>
+        <option>HQ4</option>
+        <option>Recon1</option>
+        <option>Recon2</option>
+        <option>Recon3</option>
+        <option>Recon4</option>
+        <option>Recon5</option>
+      </select>
+      &nbsp;and then&nbsp;
+      <input type="button" onclick="getModule()" value="Randomize!">
+    </form>
+
+    <br>
+    <h3 id="selectedModule"></h3>
+
+    <div id="randomMercs"></div>
+
+    <br>
+
+    <div id="instructions">
+      <ol id="list"></ol>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
