@@ -6,7 +6,6 @@ var starterDeck = ['4 Refugees','3 Scavengers','1 Brawler','1 Spear','1 Shovel']
 var baseMercs = ['Brawler','Hunter','Group Leaders','Saboteur','Scavenger','Scout','Sniper Team','Thugs'];
 var hqMercs = ['Medics','Engineers'];
 var reconMercs = ['Assassin','Courier','Drill Sergeant','Guard','Provocateur','Rogue','Scrappers','Spy','Tinker'];
-var allMercs = baseMercs.concat(hqMercs,reconMercs);
 
 // Junk:
 var baseJunk = ['Junk','Medkit','Multitool','Net','Pickaxe','Pills','Shovel','Spear'];
@@ -46,7 +45,65 @@ var communityModules = [];
 var allModules = baseModules.contact(hqModules,reconModules,communityModules);
 
 
+var check; 
+
+function checkTest() {
+	check = $('#hqCheck').is(':checked');
+	if (check) {
+		$('#somediv').html("HQ!");
+	} else {
+		$('#somediv').html("<br>");
+	}
+}
+
+
 function getModule() {
+
+
+	// super messy... need to try putting these if statements in a loop
+
+	var base, hq, recon;
+
+	if (baseCheck.checked) {
+		$('#somediv').html("Base!");
+		base = true;
+	} else {
+		$('#somediv').html("<br>");
+		base = false;
+	}
+
+	if (hqCheck.checked) {
+		$('#somediv2').html("HQ!");
+		hq = true;
+	} else {
+		$('#somediv2').html("<br>");
+		hq = false;
+	}
+
+	if (reconCheck.checked) {
+		$('#somediv3').html("Recon!");
+		recon = true;
+	} else {
+		$('#somediv3').html("<br>");
+		recon = false;
+	}
+
+	var allMercs = [];
+	if (base) { 
+		allMercs = allMercs.concat(baseMercs);
+	}
+	if (hq) { 
+		allMercs = allMercs.concat(hqMercs);
+	}
+	if (recon) { 
+		allMercs = allMercs.concat(reconMercs);
+	}
+
+	$('#allmercs').html(allMercs.join(", "));
+
+
+
+
 
 	var choice = document.getElementById('modules');
 
@@ -103,7 +160,7 @@ function getModule() {
 		}
 	}
 
-    var counter = 10 - randomMercs.length;
+    var counter = Math.min(allMercs.length,10) - randomMercs.length;
 
     while (counter--) {
     	randomIndex = Math.floor(Math.random() * tempArray.length);
@@ -111,8 +168,8 @@ function getModule() {
 		tempArray.splice(randomIndex,1);
     }
 
-    document.getElementById('selectedModule').innerHTML = title;
-    document.getElementById('randomMercs').innerHTML = '<strong>Mercenaries: </strong>' + randomMercs.sort().join(', ') + '.';
+    $('#selectedModule').html(title);
+    $('#randomMercs').html('<strong>Mercenaries: </strong>' + randomMercs.sort().join(', ') + '.');
 
     $('#list').empty();
 
