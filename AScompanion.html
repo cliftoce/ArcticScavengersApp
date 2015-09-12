@@ -20,12 +20,34 @@
   <div id="container">
 
     <form>
-      <input id="baseCheck" type="checkbox" name="base" checked>Base Game</input>
-      <input id="hqCheck" type="checkbox" name="hq">HQ Expansion</input>
-      <input id="reconCheck" type="checkbox" name="recon">Recon Expansion</input>
+      <div style="float: left; layout: inline-block;">
+        <label class="check">
+          <input id="baseCheck" type="checkbox" class="check-input" checked/>
+          <span class="check-label"></span>
+          <span class="check-handle"></span>
+        </label>Base Game&nbsp;&nbsp;
+        <label class="check">
+          <input id="hqCheck" type="checkbox" class="check-input"/>
+          <span class="check-label"></span>
+          <span class="check-handle"></span>
+        </label>HQ Expansion&nbsp;&nbsp;
+        <label class="check">
+          <input id="reconCheck" type="checkbox" class="check-input"/>
+          <span class="check-label"></span>
+          <span class="check-handle"></span>
+        </label>Recon Expansion
+      </div>
+      <div style="float: right; layout: inline-block;">
+        Graphics:&nbsp;
+        <label class="switch">
+          <input type="checkbox" class="switch-input"/>
+          <span class="switch-label" data-on="Fancy" data-off="Simple"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
     </form>
 
-    <br>
+    <br><br>
 
     <div id="somediv"><br></div>
     <div id="somediv2"><br></div>

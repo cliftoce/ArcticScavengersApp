@@ -99,7 +99,7 @@ function getModule() {
 		allMercs = allMercs.concat(reconMercs);
 	}
 
-	$('#allmercs').html(allMercs.join(", "));
+	$('#allmercs').html(allMercs.sort().join(", "));
 
 
 
@@ -119,7 +119,7 @@ function getModule() {
 		instructions = ["Set up the game in the standard fashion.",
 						"Add the stack of <em>Medic</em> cards alongside the other mercenary cards.",
 						"Shuffle the 8 new <em>Junkyard</em> cards into the <em>Junkyard</em> deck. For now ignore the special ability of the <em>Toolkit</em>.",
-						"Locate the <em>Gearheads</em> and <em>Pharmers</em>. Place them on the table next ot the mercenary stacks."]
+						"Locate the <em>Gearheads</em> and <em>Pharmers</em>. Place them on the table next to the mercenary stacks."]
 		break;
 	case 'HQ2':
 		title = hqModules[1];
