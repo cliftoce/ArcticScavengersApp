@@ -12,6 +12,8 @@
   <link rel="stylesheet" type="text/css" href="AScompanion.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <script type="text/javascript" src="AScompanion.js"></script>
 </head>
 
@@ -28,12 +30,12 @@
           <span class="check-handle"></span>
         </label>Base Game&nbsp;&nbsp;
         <label class="check">
-          <input id="hqCheck" type="checkbox" class="check-input" value="HQ Expansion"/>
+          <input id="hqCheck" type="checkbox" class="check-input" value="HQ Expansion" checked/>
           <span class="check-label"></span>
           <span class="check-handle"></span>
         </label>HQ Expansion&nbsp;&nbsp;
         <label class="check">
-          <input id="reconCheck" type="checkbox" class="check-input" value="Recon Expansion"/>
+          <input id="reconCheck" type="checkbox" class="check-input" value="Recon Expansion" checked/>
           <span class="check-label"></span>
           <span class="check-handle"></span>
         </label>Recon Expansion
@@ -55,9 +57,9 @@
     <br>
 
     <form>
-      Select a&nbsp;
-      <select id="modules">
-        <option>Game Mode</option>
+      Select a game mode&nbsp;
+      (<select id="mode">
+        <option>-</option>
         <option class="baseModule">Base Game</option>
         <option class="hqModule" disabled>HQ Module #1</option>
         <option class="hqModule" disabled>HQ Module #2</option>
@@ -68,14 +70,23 @@
         <option class="reconModule" disabled>Recon Module #3</option>
         <option class="reconModule" disabled>Recon Module #4</option>
         <option class="reconModule" disabled>Recon Module #5</option>
-      </select>
+      </select>)
+      &nbsp;and number of players&nbsp;
+      (<select id="players">
+        <option>-</option>
+        <option id="1p">1</option>
+        <option id="2p">2</option>
+        <option id="3p">3</option>
+        <option id="4p">4</option>
+        <option id="5p">5</option>
+      </select>)
       &nbsp;and then&nbsp;
-      <input type="button" onclick="getModule()" value="Randomize!">
+      <input type="button" id="randomizer" value="Randomize!">
       &nbsp;the set-up.
     </form>
 
     <br>
-    <h3 id="selectedModule"></h3>
+    <h3 id="selectedMode"></h3>
 
     <p id="description"></p>
 
@@ -84,8 +95,56 @@
     <br>
 
     <div id="instructions">
-      <ol id="list"></ol>
+      <div>
+        <h3>Basic Instructions</h3>
+        <div>
+          <ol id="baseInstructions"></ol>
+        </div>
+      </div>
+      <div>
+        <h3>Special 2-Player Rules</h3>
+        <div>
+          <ol id="specialInstructions"></ol>
+        </div>
+      </div>
+      <div>
+        <h3>Module-Specific Instructions</h3>
+        <div>
+          <ol id="moduleInstructions"></ol>
+        </div>
+      </div>
+      <div>
+        <h3>Game Phases</h3>
+        <div>
+          <ol>
+            <li><h4>Drawing Phase</h4>
+              <ul>
+                <li>Discard all cards from the previous round.</li>
+                <li>Each player draw 5 cards from teh top of their deck, shuffling their discard pile and adding it to their deck whenever necessary.</li>
+                <li>(<em>Except</em> in a 2-player game) Beginning with the <strong>third round</strong> and continuing for the remainder of the game, the <em>Initiator</em> peeks at the top card on the <em>Contested Resources</em> pile and then returns it to the pile.</li>
+              </ul>
+            </li>
+            <br>
+            <li><h4>Resource Gathering Phase</h4>
+              <ul>
+                <li>The <em>Initiator</em> takes the first action and uses any number of cards to gather resources.</li>
+                <li>The <em>Initiator</em> announces how many of their cards will remain for the skirmish.</li>
+                <li>Play continue with the other players, in clockwise order, and they execute the same two steps as above.</li>
+              </ul>
+            </li>
+            <br>
+            <li><h4>Skirmish Phase</h4>
+              <ul>
+                <li>Once all players have taken their resource gathering actions, players reveal their remaining cards for the skirmish and a winner is determined.</li>
+                <li>The winner of the skirmish takes the top card from the <em>Contested Resources</em> pile and adds it to their discard pile.</li>
+                <li>The <em>Initiator</em> passes the <em>initiator card</em> to the next player in clockwise order, starting a new round</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
     </div>
+
 
   </div>
 
