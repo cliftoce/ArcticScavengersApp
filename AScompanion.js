@@ -4,13 +4,6 @@ $(document).ready( function () {
 
 	dropDownDisabler();
 
-	// Collapsible accordion instructions list
-	$('#instructions > div').accordion({ 
-		active: false,
-		collapsible: true,
-		heightStyle: "content"
-	});
-
 	$('form#moduleSelection input').each(function() {
 		$(this).click(function() {
 			dropDownDisabler();
@@ -26,20 +19,32 @@ $(document).ready( function () {
 	    $('#descr').html(MoDe['descr']);
 	    $('#randomMercs').html('<strong>Mercenaries: </strong>' + randomMercs.sort().join(', ') + '.');
 	    
-	    $('#baseInstructions').empty();
+	    $('#instructions').empty();
+	    $('#instructions').append('<div><h3>Basic Instructions</h3><div><ol id="baseInstructions"></ol></div></div>');
 	    for (var i in instructions['basic']) {;
 	    	$('#baseInstructions').append('<li>' + instructions['basic'][i] + '</li>');
 	    }
-	    $('#specialInstructions').empty();
 	    if ('2p' in instructions) {
+	    	$('#instructions').append('<div><h3>Special 2-Player Instructions</h3><div><ol id="2pInstructions"></ol></div></div>');
 		    for (var i in instructions['2p']) {;
-		    	$('#specialInstructions').append('<li>' + instructions['2p'][i] + '</li>');
+		    	$('#2pInstructions').append('<li>' + instructions['2p'][i] + '</li>');
 		    }
 		}
-		$('#moduleInstructions').empty();
-	    for (var i in MoDe['instr']) {;
-	    	$('#moduleInstructions').append('<li>' + MoDe['instr'][i] + '</li>');
-	    }
+		if (MoDe['name'] != 'Base Game.') {
+			$('#instructions').append('<div><h3>Module-Specific Instructions</h3><div><ol id="moduleInstructions"></ol></div></div>');
+		    for (var i in MoDe['instr']) {;
+		    	$('#moduleInstructions').append('<li>' + MoDe['instr'][i] + '</li>');
+		    }
+		}
+
+		$('#phases').css('display','block');
+
+	    // Collapsible accordion instructions list
+		$('#instructions > div, #phases').accordion({ 
+			active: false,
+			collapsible: true,
+			heightStyle: "content"
+		});
 	});
 
 	function dropDownDisabler() {
