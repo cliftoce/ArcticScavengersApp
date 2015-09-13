@@ -10,8 +10,9 @@
   <meta name="description" content="Arctic Scavengers companion – test page.">
 
   <link rel="stylesheet" type="text/css" href="AScompanion.css">
-  <script type="text/javascript" src="AScompanion.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="AScompanion.js"></script>
 </head>
 
 
@@ -19,24 +20,26 @@
 
   <div id="container">
 
-    <form>
+    <form id="moduleSelection">
       <div style="float: left; layout: inline-block;">
         <label class="check">
-          <input id="baseCheck" type="checkbox" class="check-input" checked/>
+          <input id="baseCheck" type="checkbox" class="check-input" value="Base Game" checked/>
           <span class="check-label"></span>
           <span class="check-handle"></span>
         </label>Base Game&nbsp;&nbsp;
         <label class="check">
-          <input id="hqCheck" type="checkbox" class="check-input"/>
+          <input id="hqCheck" type="checkbox" class="check-input" value="HQ Expansion"/>
           <span class="check-label"></span>
           <span class="check-handle"></span>
         </label>HQ Expansion&nbsp;&nbsp;
         <label class="check">
-          <input id="reconCheck" type="checkbox" class="check-input"/>
+          <input id="reconCheck" type="checkbox" class="check-input" value="Recon Expansion"/>
           <span class="check-label"></span>
           <span class="check-handle"></span>
         </label>Recon Expansion
       </div>
+    </form>
+    <form>
       <div style="float: right; layout: inline-block;">
         Graphics:&nbsp;
         <label class="switch">
@@ -63,23 +66,27 @@
     <form>
       Select a&nbsp;
       <select id="modules">
-        <option>Module</option>
-        <option>HQ1</option>
-        <option>HQ2</option>
-        <option>HQ3</option>
-        <option>HQ4</option>
-        <option>Recon1</option>
-        <option>Recon2</option>
-        <option>Recon3</option>
-        <option>Recon4</option>
-        <option>Recon5</option>
+        <option>Game Mode</option>
+        <option class="baseModule">Base Game</option>
+        <option class="hqModule" disabled>HQ Module #1</option>
+        <option class="hqModule" disabled>HQ Module #2</option>
+        <option class="hqModule" disabled>HQ Module #3</option>
+        <option class="hqModule" disabled>HQ Module #4</option>
+        <option class="reconModule" disabled>Recon Module #1</option>
+        <option class="reconModule" disabled>Recon Module #2</option>
+        <option class="reconModule" disabled>Recon Module #3</option>
+        <option class="reconModule" disabled>Recon Module #4</option>
+        <option class="reconModule" disabled>Recon Module #5</option>
       </select>
       &nbsp;and then&nbsp;
       <input type="button" onclick="getModule()" value="Randomize!">
+      &nbsp;the set-up.
     </form>
 
     <br>
     <h3 id="selectedModule"></h3>
+
+    <p id="description"></p>
 
     <div id="randomMercs"></div>
 

@@ -1,3 +1,54 @@
+
+$(document).ready( function () {
+	$('form#moduleSelection input').each(function() {
+		$(this).click(function() { 
+			var expansions = ['base','hq','recon'];
+			for (var i in expansions) {
+				if ($('#' + expansions[i] + 'Check')[0].checked) {
+					$('option.' + expansions[i] + 'Module').removeAttr('disabled');
+					$('span.' + expansions[i] + 'Disabled').remove();
+				} else {
+					$('option.' + expansions[i] + 'Module').attr('disabled','disabled');
+					if ($('.' + expansions[i] + 'Disabled').length == 0) {
+						$('option.' + expansions[i] + 'Module').append('<span class="' + expansions[i] + 'Disabled"> (click "' + $('#' + expansions[i] + 'Check')[0].value + '" to enable)</span>');
+					}
+				}
+			}
+
+			/*
+			if ($('#baseCheck')[0].checked) {
+				$('option.baseGame').removeAttr('disabled');
+				$('span.baseDisabled').remove();
+			} else {
+				$('option.baseGame').attr('disabled','disabled');
+				if ($('.baseDisabled').length == 0) {
+					$('option.baseGame').append('<span class="baseDisabled"> (click "Base Game" to enable)</span>');
+				}
+			}
+			if ($('#hqCheck')[0].checked) {
+				$('option.hqModule').removeAttr('disabled');
+				$('span.hqDisabled').remove();
+			} else {
+				$('option.hqModule').attr('disabled','disabled');
+				if ($('.hqDisabled').length == 0) {
+					$('option.hqModule').append('<span class="hqDisabled"> (click "HQ Expansion" to enable)</span>');
+				}
+			}
+			if ($('#reconCheck')[0].checked) {
+				$('option.reconModule').removeAttr('disabled');
+				$('span.reconDisabled').remove();
+			} else {
+				$('option.reconModule').attr('disabled','disabled');
+				if ($('.reconDisabled').length == 0) {
+					$('option.reconModule').append('<span class="reconDisabled"> (click "Recon Expansion" to enable)</span>');
+				}
+			}
+			*/
+		});
+	}); 
+});
+
+
 // Starter Decks:
 var starterDeck = ['4 Refugees','3 Scavengers','1 Brawler','1 Spear','1 Shovel'];
 // recon starter alts … 'Scouting Refugee','Hardy Scavenger'
@@ -45,17 +96,6 @@ var communityModules = [];
 var allModules = baseModules.contact(hqModules,reconModules,communityModules);
 
 
-var check; 
-
-function checkTest() {
-	check = $('#hqCheck').is(':checked');
-	if (check) {
-		$('#somediv').html("HQ!");
-	} else {
-		$('#somediv').html("<br>");
-	}
-}
-
 
 function getModule() {
 
@@ -99,7 +139,7 @@ function getModule() {
 		allMercs = allMercs.concat(reconMercs);
 	}
 
-	$('#allmercs').html(allMercs.sort().join(", "));
+	$('#allmercs').html(allMercs.sort().join(', '));
 
 
 
@@ -108,45 +148,65 @@ function getModule() {
 	var choice = document.getElementById('modules');
 
     var title = '';
+    var description = '';
     var intructions = [];
 	var randomIndex = 0;
     var randomMercs = [];
     var tempArray = allMercs.slice();
 
     switch (choice.options[choice.selectedIndex].text) {
-	case 'HQ1':
+    case 'Base Game':
+		title = 'Base Game.';
+		instructions = ["."]
+		break;
+	case 'HQ Module #1':
 		title = hqModules[0];
 		instructions = ["Set up the game in the standard fashion.",
 						"Add the stack of <em>Medic</em> cards alongside the other mercenary cards.",
 						"Shuffle the 8 new <em>Junkyard</em> cards into the <em>Junkyard</em> deck. For now ignore the special ability of the <em>Toolkit</em>.",
 						"Locate the <em>Gearheads</em> and <em>Pharmers</em>. Place them on the table next to the mercenary stacks."]
 		break;
-	case 'HQ2':
+	case 'HQ Module #2':
 		title = hqModules[1];
-		instructions = ["Sample instructions."];
+		instructions = ["Set up the game just as you did for HQ Module #1.",
+						"Add the stack of <em>Engineer</em> cards alongside the other mercenary cards.",
+						"Shuffle the 12 buildign cards together (indicated by the building icon in the upper left corner) and place them face-down next to the <em>Junkyard</em> pile (they form a third pile of cards next to the <em>Junkyard</em> and <em>Contested Resources</em>.",
+						"Add the 3rd gang card (<em>Masons</em>) next to the other 2 gangs.",
+						"Players can now use the 'special ability' from the <em>Toolkit</em> (since it works with buildings)."];
 		break;
-	case 'HQ3':
+	case 'HQ Module #3':
 		title = hqModules[2];
+		instructions = ["Set up the game just as you did for HQ Module #2.",
+						"Shuffle the tribal leader cards together and deal two, face-down, to each player.  From those two, each player keeps only 1 to represent their tribal leader (players may look at them to decide). The card is kept face-up in the player's play area for everyone to see. The other card is set aside and will not be used this game."];
 		break;
-	case 'HQ4':
+	case 'HQ Module #4':
 		title = hqModules[3];
+		instructions = ["Set up the game just as you did for HQ Module #3.",
+						"Add two new rules: <ul><li>A <em>Saboteur</em> may attack a building that is completed and disable it.</li><li>A <em>Sniper Team</em> may attack a tribal leader, wounding him and removing his advantage until a <em>med</em> is applied to the leader to heal him.</li></ul>"];
 		break;
-	case 'Recon1':
+	case 'Recon Module #1':
 		title = reconModules[0];
 		randomMercs = ['Spy'];
+		description = "Recon includes many mercenaries, several of which are designed to work together to produce a web of intelligence and deception.";
+		instructions = ["Put the full stack of <em>Scouting Refugees</em> in play as a separate stack available for hire, but visually separate from the other mercenaries.",
+						"Select the <em>Spy</em> and 9 other mercenries available for hire for a total of 10 mercenary stacks, plus the <em>Scouting Refugees</em>.",
+						"Shuffle the 4 <em>Binoculars</em> into the <em>Junkyard</em>."];
 		break;
-	case 'Recon2':
+	case 'Recon Module #2':
 		title = reconModules[1];
 		randomMercs = ['Assassin','Provocateur','Rogue','Guard'];
+		description = "This module introduces a couple of the deception elements of Recon.  The resolution of these cards during the skirmish can sometimes get confusing.  It is important to remember that resolution decisions happen in play order (starting with that round's <em>initiator</em>) rather than in real-time.";
+		instructions = ["Put the <em>Assassin</em>, <em>Guard</em>, <em>Provocateur</em>, and <em>Rogue</em> in play together as mercenaries available for hire.",
+						"Select 6 other mercenaries for a total of 10 stacks."];
 		break;
-	case 'Recon3':
+	case 'Recon Module #3':
 		title = reconModules[2];
 		randomMercs = ['Courier','Drill Sergeant','Scrappers','Tinker'];
 		break;
-	case 'Recon4':
+	case 'Recon Module #4':
 		title = reconModules[3];
 		break;
-	case 'Recon5':
+	case 'Recon Module #5':
 		title = reconModules[4];
 		break;
 	default:
@@ -169,6 +229,7 @@ function getModule() {
     }
 
     $('#selectedModule').html(title);
+    $('#description').html(description);
     $('#randomMercs').html('<strong>Mercenaries: </strong>' + randomMercs.sort().join(', ') + '.');
 
     $('#list').empty();
