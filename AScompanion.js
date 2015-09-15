@@ -3,7 +3,8 @@ $(document).ready( function () {
 	var components = ['base','hq','recon'];
 
 	hideRules();
-	updateAvailableModes();
+	toggleModes();
+	$('#output, .bubble').hide();
 
 	$('.accordion').accordion({ 
 		animate: 100, // animation duration (ms)
@@ -15,13 +16,14 @@ $(document).ready( function () {
 
 	$('form#moduleSelection input').each(function() {
 		$(this).click(function() {
-			updateAvailableModes();
+			toggleModes();
 		});
 	});
 
 	$('#randomizer').click(function() {
 		hideRules();
-		$('#basicRules').show();
+		$('#output, #rules, #basicRules').show();
+		toggleVariants()
 		var mode = getMode();
 		var players = getPlayers();
 		var Modules = { // hashtable of arrays of the form ['module name',['required mercenaries']]
@@ -36,15 +38,17 @@ $(document).ready( function () {
 			'recon4': ['Recon Module #4: "Randomized Contested Resources"',[]],
 			'recon5': ['Recon Module #5: "The Kitchen Sink"',[]]
 		}
-		$('#selectedMode').html(Modules[mode][0] + ( players === '-' ? '' : ' for ' + players + ( players === '1' ? ' player.' : ' players.' )));
-	    $('#randomMercs').html('<strong>Mercenaries: </strong>' + randomizeMercs(Modules[mode][1]).sort().join(', ') + '.');
+		if (mode !== '-') {
+			$('#selectedMode').show().html(Modules[mode][0] + ( players === '-' ? '' : ' for ' + players + ( players === '1' ? ' player.' : ' players.' )));
+		    $('#randomMercs').show().html('<strong>Mercenaries: </strong>' + randomizeMercs(Modules[mode][1]).sort().join(', ') + '.');
+		}
 	});
 
 	function hideRules() {
 		$('.accordion.rules').hide();
 	}
 
-	function updateAvailableModes() {
+	function toggleModes() {
 		for (var i in components) { // loop over the prefixes 'base', 'hq', and 'recon'
 			if ($('#' + components[i] + 'Check')[0].checked) { // enable game mode(s) according to the checked checkboxes
 				$('option.' + components[i] + 'Module').removeAttr('disabled');
@@ -55,6 +59,16 @@ $(document).ready( function () {
 					$('option.' + components[i] + 'Module').append('<span class="' + components[i] + 'Disabled"> (click "' + $('#' + components[i] + 'Check')[0].value + '" to enable)</span>');
 				}
 			}
+		}
+	}
+
+	function toggleVariants() {
+		$('#leaderDrafting, #startingHands').hide();
+		if ($('#hqCheck')[0].checked) {
+			$('#variants, #leaderDrafting').show(); // show Leader Drafting varient (requires HQ)
+		}
+		if ($('#reconCheck')[0].checked) {
+			$('#variants, #startingHands').show(); // show Alternate Starting Hands variant (requires Recon)
 		}
 	}
 

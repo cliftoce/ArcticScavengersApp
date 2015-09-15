@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Arctic Scavengers Companion</title>
-  <meta name="description" content="Arctic Scavengers companion – test page.">
+  <title>Arctic Scavengers Randomizer</title>
+  <meta name="description" content="Arctic Scavengers randomizer – test page.">
 
   <link rel="stylesheet" type="text/css" href="AScompanion.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -17,413 +17,767 @@
 </head>
 
 <body>
-
   <div id="container">
-
-    <form id="moduleSelection">
-      <div style="float: left; display: inline-block;">
-        <div class="expansionSelection">
-          Base Game:
-          <label class="switch">
-            <input id="baseCheck" type="checkbox" class="switch-input" value="Base Game" checked/>
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </div>
-        <div class="expansionSelection">
-          HQ Expansion:
-          <label class="switch">
-            <input id="hqCheck" type="checkbox" class="switch-input" value="HQ Expansion" checked/>
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </div>
-        <div class="expansionSelection">
-          Recon Expansion:
-          <label class="switch">
-            <input id="reconCheck" type="checkbox" class="switch-input" value="Recon Expansion" checked/>
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </div>
-      </div>
-    </form>
-    <form>
-      <div style="float: right; layout: inline-block;">
-        Thumbnails:
-        <label class="switch">
-          <input type="checkbox" class="switch-input"/>
-          <span class="switch-label" data-on="On" data-off="Off"></span>
-          <span class="switch-handle"></span>
-        </label>
-      </div>
-    </form>
-
-    <div class="optionSelection">
-      <form>
-        <div id="gameMode">
-          <div class="widescreen">Select a game mode&nbsp; (</div>
-          <div class="narrowscreen">Game Mode:&nbsp;</div>
-          <select id="mode">
-            <option>-</option>
-            <option class="baseModule" value="base">Base Game</option>
-            <option class="hqModule" value="hq1" disabled>HQ Module #1</option>
-            <option class="hqModule" value="hq2" disabled>HQ Module #2</option>
-            <option class="hqModule" value="hq3" disabled>HQ Module #3</option>
-            <option class="hqModule" value="hq4" disabled>HQ Module #4</option>
-            <option class="reconModule" value="recon1" disabled>Recon Module #1</option>
-            <option class="reconModule" value="recon2" disabled>Recon Module #2</option>
-            <option class="reconModule" value="recon3" disabled>Recon Module #3</option>
-            <option class="reconModule" value="recon4" disabled>Recon Module #4</option>
-            <option class="reconModule" value="recon5" disabled>Recon Module #5</option>
-          </select>
-        </div>
-        <div id="numPlayers">
-          <div class="widescreen">) &nbsp;and number of players&nbsp; (</div>
-          <div class="narrowscreen">Number of Players:</div>
-          <select id="players">
-            <option>-</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="widescreen">) &nbsp;and then&nbsp;</div>
-        <input type="button" id="randomizer" value="Randomize!">
-        <div class="widescreen">&nbsp;set-up.</div>
-      </form>
-    </div><!-- end optionSelection -->
-
-    <div class="output">
-      <h3 id="selectedMode"></h3>
-      <div id="randomMercs"></div>
-      <br>
-
-      <div id="basicRules" class="accordion rules">
-        <h3>Basic Rules</h3>
-        <div>
-          <div class="accordion">
-            <strong>Gameplay Overview</strong>
-            <div>
-              <ul>
-                <li>Players work to build their tribes as large as possible by hiring mercenaries, scaveninging junk piles, and winning skirmishes against other players' tribes.</li>
-                <li>Each tribe member card in a tribe represents the number of people shown on the card.</li>
-                <li>The player with the largest tribe (most people) at the end of the game is the winner.</li>
-              </ul>
+    <div id="header">
+      <h2>Arctic Scavengers Randomizer</h2>
+    </div>
+    <div id="content">
+      <div id="input">
+        <form id="moduleSelection">
+          <div style="float: left; display: inline-block;">
+            <div class="expansionSelection">
+              Base Game:
+              <label class="switch">
+                <input id="baseCheck" type="checkbox" class="switch-input" value="Base Game" checked/>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div class="expansionSelection">
+              HQ Expansion:
+              <label class="switch">
+                <input id="hqCheck" type="checkbox" class="switch-input" value="HQ Expansion" checked/>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div class="expansionSelection">
+              Recon Expansion:
+              <label class="switch">
+                <input id="reconCheck" type="checkbox" class="switch-input" value="Recon Expansion" checked/>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
             </div>
           </div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Each player takes an identical starter deck: 4 <em>Refugee</em>s, 3 <em>Scavenger</em>s, 1 <em>Brawler</em>, 1 <em>Spear</em>, 1 <em>Shovel</em>.</li>
-                <li>Return any additional <em>Refugee</em> cards to the box; they will not be used this game.</li>
-                <li>Sort the remaining cards into three categories: <em>Contested Resources</em>, <em>Junkyard</em>, and <em>Mercenaries</em>.</li>
-                <li>Each player shuffles their deck of 10 cards and places it face down in their play area.</li>
-                <li>Randomly select a player and hand them the <em>initiator card</em>; this player will serve as the initator for the first round.</li>
-              </ul>
-            </div>
+        </form>
+        <form>
+          <div style="float: right; layout: inline-block;">
+            Thumbnails:
+            <label class="switch">
+              <input type="checkbox" class="switch-input"/>
+              <span class="switch-label" data-on="On" data-off="Off"></span>
+              <span class="switch-handle"></span>
+            </label>
           </div>
-          <div class="accordion">
-            <strong>Game Phases</strong>
+        </form>
+        <div class="optionSelection">
+          <form>
+            <div id="gameMode">
+              <div class="widescreen">Select a game mode&nbsp; (</div>
+              <div class="narrowscreen">Game Mode:&nbsp;</div>
+              <select id="mode">
+                <option>-</option>
+                <option class="baseModule" value="base">Base Game</option>
+                <option class="hqModule" value="hq1" disabled>HQ Module #1</option>
+                <option class="hqModule" value="hq2" disabled>HQ Module #2</option>
+                <option class="hqModule" value="hq3" disabled>HQ Module #3</option>
+                <option class="hqModule" value="hq4" disabled>HQ Module #4</option>
+                <option class="reconModule" value="recon1" disabled>Recon Module #1</option>
+                <option class="reconModule" value="recon2" disabled>Recon Module #2</option>
+                <option class="reconModule" value="recon3" disabled>Recon Module #3</option>
+                <option class="reconModule" value="recon4" disabled>Recon Module #4</option>
+                <option class="reconModule" value="recon5" disabled>Recon Module #5</option>
+              </select>
+            </div>
+            <div id="numPlayers">
+              <div class="widescreen">) &nbsp;and number of players&nbsp; (</div>
+              <div class="narrowscreen">Number of Players:</div>
+              <select id="players">
+                <option>-</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="widescreen">) &nbsp;and then&nbsp;</div>
+            <input type="button" id="randomizer" value="Randomize!">
+            <div class="widescreen">&nbsp;set-up.</div>
+          </form>
+        </div><!-- end optionSelection -->
+      </div><!-- end input -->
+      <div id="output">
+        <h3 id="selectedMode" class="bubble"></h3>
+        <div id="randomMercs" class="bubble"></div>
+        <div id="rules" class="bubble">
+          <div id="basicRules" class="accordion rules">
+            <h3>Basic Rules</h3>
             <div>
               <div class="accordion">
-                <strong>1. Drawing Phase</strong>
+                <strong>Gameplay Overview</strong>
                 <div>
                   <ul>
-                    <li>Discard all cards from the previous round.</li>
-                    <li>Each player draw 5 cards from the top of their deck, shuffling their discard pile and adding it to their deck whenever necessary.</li>
-                    <li id="2pException">Beginning with the <strong>third round</strong> and continuing for the remainder of the game, the <em>Initiator</em> peeks at the top card on the <em>Contested Resources</em> pile and then returns it to the pile.</li>
+                    <li>Players work to build their tribes as large as possible by hiring mercenaries, scaveninging junk piles, and winning skirmishes against other players' tribes.</li>
+                    <li>Each tribe member card in a tribe represents the number of people shown on the card.</li>
+                    <li>The player with the largest tribe (most people) at the end of the game is the winner.</li>
                   </ul>
                 </div>
               </div>
               <div class="accordion">
-                <strong>2. Resource Gathering Phase</strong>
+                <strong>Setup</strong>
                 <div>
                   <ul>
-                    <li>The <em>Initiator</em> takes the first action and uses any number of cards to gather resources.</li>
-                    <li>The <em>Initiator</em> announces how many of their cards will remain for the skirmish.</li>
-                    <li>Play continue with the other players, in clockwise order, and they execute the same two steps as above.</li>
+                    <li>Each player takes an identical starter deck: 4 <em>Refugee</em>s, 3 <em>Scavenger</em>s, 1 <em>Brawler</em>, 1 <em>Spear</em>, 1 <em>Shovel</em>.</li>
+                    <li>Return any additional <em>Refugee</em> cards to the box; they will not be used this game.</li>
+                    <li>Sort the remaining cards into three categories: <em>Contested Resources</em>, <em>Junkyard</em>, and <em>Mercenaries</em>.</li>
+                    <li>Each player shuffles their deck of 10 cards and places it face down in their play area.</li>
+                    <li>Randomly select a player and hand them the <em>initiator card</em>; this player will serve as the initator for the first round.</li>
                   </ul>
                 </div>
               </div>
               <div class="accordion">
-                <strong>3. Skirmish Phase</strong>
+                <strong>Key Concepts</strong>
+                <div>
+                  <ol>
+                    <li>A player may take multiple actions in a round.</li>
+                    <li>A player may only perform a given action (<em>dig</em>/<em>hunt</em>/<em>draw</em>/<em>hire</em>/etc.) once per round.</li>
+                    <li>A player may use multiple cards to increase the potency of an action.</li>
+                    <li>Once a player has used a card to perform an action, they may not perform another action with that same card.</li>
+                    <li>A player must combine cards like tools, <em>Group Leaders</em>, and any card with a modifier (e.g. +1, +2, +4) with another card that has the base ability.</li>
+                    <li>A player may only use one tool card for any tribe member, even if that tribe member represents multiple people.</li>
+                    <li>When a player needs to <em>draw</em> more cards than are available in their deck, they first draw all cards from their deck, then shuffles their disscard pile to create a new deck and continues drawing from there.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Game Phases</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>1. Drawing Phase</strong>
+                    <div>
+                      <ul>
+                        <li>Discard all cards from the previous round.</li>
+                        <li>Each player draw 5 cards from the top of their deck, shuffling their discard pile and adding it to their deck whenever necessary.</li>
+                        <li id="2pException">Beginning with the <strong>third round</strong> and continuing for the remainder of the game, the <em>Initiator</em> peeks at the top card on the <em>Contested Resources</em> pile and then returns it to the pile.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>2. Resource Gathering Phase</strong>
+                    <div>
+                      <ul>
+                        <li>The <em>Initiator</em> takes the first action and uses any number of cards to gather resources.</li>
+                        <li>The <em>Initiator</em> announces how many of their cards will remain for the skirmish.</li>
+                        <li>Play continue with the other players, in clockwise order, and they execute the same two steps as above.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>3. Skirmish Phase</strong>
+                    <div>
+                      <ul>
+                        <li>Once all players have taken their resource gathering actions, players reveal their remaining cards for the skirmish and a winner is determined.</li>
+                        <li>The winner of the skirmish takes the top card from the <em>Contested Resources</em> pile and adds it to their discard pile.</li>
+                        <li>The <em>Initiator</em> passes the <em>initiator card</em> to the next player in clockwise order, starting a new round</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- end basicRules -->
+          <div id="soloRules" class="accordion rules">
+            <h3>Solo Rules</h3>
+            <div>
+              <div class="accordion">
+                <strong>Setup</strong>
                 <div>
                   <ul>
-                    <li>Once all players have taken their resource gathering actions, players reveal their remaining cards for the skirmish and a winner is determined.</li>
-                    <li>The winner of the skirmish takes the top card from the <em>Contested Resources</em> pile and adds it to their discard pile.</li>
-                    <li>The <em>Initiator</em> passes the <em>initiator card</em> to the next player in clockwise order, starting a new round</li>
+                    <li>Shuffle all 28 <em>Contested Resource</em> cards together along with 2 <em>Rifles</em> and 2 <em>Thugs</em>. This should form a single pile of 32 cards.</li>
+                    <li>Break the 32 cards up as follows into 7 face-down piles, each representing a skirmish that you must encounter: 
+                      <ul>
+                        <li>One set of 3 cards.</li>
+                        <li>Two sets of 4 cards.</li>
+                        <li>Three sets of 5 cards.</li>
+                        <li>One set of 6 cards.</li>
+                      </ul>
+                    </li>
+                    <li>Select 10 stacks of <em>mercenaries</em> and lay them out in front of you like normal.</li>
+                    <li>You may play with or without a <em>Tribal Leader</em> (either way, do not select one for the opponents).</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Gameplay</strong>
+                <div>
+                  <ul>
+                    <li>There is no concept of an <em>Initator</em>.</li>
+                    <li>Every time you shuffle your discard to form a new deck, you must take the top card of your newly shufled deck and remove it permanently from play.  This represents the attrition of your tribe over time.</li>
+                    <li>There is no forced skirmish phase. On any turn, you may choose to iniate a skirmish as follows:
+                      <uL>
+                        <li>Select one of the available opponents (represented by the face-down stacks of cards).</li>
+                        <li>Send as many or as few forces from your hand as you choose.</li>
+                        <li>During skirmish resolution, assume the opponent will take the most favorable action.</li>
+                        <li>If you win, take one card of your choice from the opponent's skirmish forces as a prize and place it in your discard pile.</li>
+                        <li>If you lose, you must permanently remove one card of your choice from your skirmish force and set it aside.</li>
+                        <li>Whether you win or lose, the opponent's remaining skirmish force should be removed from play (thus, each of the seven forces are encountered only once).</li>
+                      </uL>
+                    </li>
+                    <li>Play continues until you have skirmished with each of the 7 opposing forces.</li>
+                    <li>Although there is no set timer for the game, you must constnatly balance the loss of tribe asssets as you cycle through your deck with the risk of losing by going into a skirmish half-cocked.</li>
+                    <li>After you <em>fight</em> in the seventh battle, proceed to scoring.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Scoring</strong>
+                <div>
+                  <ul>
+                    <li><em>Contested Resource</em> cards in your tribe count as 2 points.</li>
+                    <li>All other cards in your tribe count as 1 point.</li>
+                    <li>Keep track of your points from game to game and try to beat your personal best.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Difficulty Level</strong>
+                <div>
+                  <ul>
+                    <li>You can always increase the solo difficulty level by adding in more mercenaries with <em>fight</em> or even <em>snipe</em> and removing <em>Tribal Families</em> (which dilute the opposition <em>fight</em> scores).</li>
                   </ul>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="soloRules" class="accordion rules">
-        <h3>Solo Rules</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
+          </div><!-- end soloRules -->
+          <div id="2pRules" class="accordion rules">
+            <h3>2-Player Rules</h3>
             <div>
-              <ul>
-                <li>Shuffle all 28 <em>Contested Resource</em> cards together along with 2 <em>Rifles</em> and 2 <em>Thugs</em>. This should form a single pile of 32 cards.</li>
-                <li>Break the 32 cards up as follows into 7 face-down piles, each representing a skirmish that you must encounter: 
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
                   <ul>
-                    <li>One set of 3 cards.</li>
-                    <li>Two sets of 4 cards.</li>
-                    <li>Three sets of 5 cards.</li>
-                    <li>One set of 6 cards.</li>
+                    <li>Remove two cards of each kind from the <em>Junkyard</em>.</li>
                   </ul>
-                </li>
-                <li>Select 10 stacks of <em>mercenaries</em> and lay them out in front of you like normal.</li>
-                <li>You may play with or without a <em>Tribal Leader</em> (either way, do not select one for the opponents).</li>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion">
-            <strong>Gameplay</strong>
-            <div>
-              <ul>
-                <li>There is no concept of an <em>Initator</em>.</li>
-                <li>Every time you shuffle your discard to form a new deck, you must take the top card of your newly shufled deck and remove it permanently from play.  This represents the attrition of your tribe over time.</li>
-                <li>There is no forced skirmish phase. On any turn, you may choose to iniate a skirmish as follows:
-                  <uL>
-                    <li>Select one of the available opponents (represented by the face-down stacks of cards).</li>
-                    <li>Send as many or as few forces from your hand as you choose.</li>
-                    <li>During skirmish resolution, assume the opponent will take the most favorable action.</li>
-                    <li>If you win, take one card of your choice from the opponent's skirmish forces as a prize and place it in your discard pile.</li>
-                    <li>If you lose, you must permanently remove one card of your choice from your skirmish force and set it aside.</li>
-                    <li>Whether you win or lose, the opponent's remaining skirmish force should be removed from play (thus, each of the seven forces are encountered only once).</li>
-                  </uL>
-                </li>
-                <li>Play continues until you have skirmished with each of the 7 opposing forces.</li>
-                <li>Although there is no set timer for the game, you must constnatly balance the loss of tribe asssets as you cycle through your deck with the risk of losing by going into a skirmish half-cocked.</li>
-                <li>After you <em>fight</em> in the seventh battle, proceed to scoring.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion">
-            <strong>Scoring</strong>
-            <div>
-              <ul>
-                <li><em>Contested Resource</em> cards in your tribe count as 2 points.</li>
-                <li>All other cards in your tribe count as 1 point.</li>
-                <li>Keep track of your points from game to game and try to beat your personal best.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion">
-            <strong>Difficulty Level</strong>
-            <div>
-              <ul>
-                <li>You can always increase the solo difficulty level by adding in more mercenaries with <em>fight</em> or even <em>snipe</em> and removing <em>Tribal Families</em> (which dilute the opposition <em>fight</em> scores).</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="2pRules" class="accordion rules">
-        <h3>2-Player Rules</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Remove two cards of each kind from the <em>Junkyard</em>.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion">
-            <strong>Other Changes</strong>
-            <div>
-              <ul>
-                <li>Eliminate all <em>Contested Resources</em> peeking.</li>
-                <li>The number of tribe members a player brings to a skirmish is no longer relevant.</li>
-                <li>Skirmishes must be won by 2.  If not, then it is a tie and the players place the <em>Contested Resource</em> on top of the <em>Junkyard</em> and then shuffle the <em>Junkyard</em>.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="hq1" class="accordion rules">
-        <h3>HQ Module #1 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Add the stack of <em>Medic</em> cards alongside the other mercenary cards.</li>
-                <li>Shuffle the 8 new <em>Junkyard</em> cards into the <em>Junkyard</em> deck. For now ignore the special ability of the <em>Toolkit</em>.</li>
-                <li>Locate the <em>Gearheads</em> and <em>Pharmers</em>. Place them on the table next to the mercenary stacks.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="hq2" class="accordion rules">
-        <h3>HQ Module #2 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Set up the game just as you did for HQ Module #1.</li>
-                <li>Add the stack of <em>Engineer</em> cards alongside the other mercenary cards.</li>
-                <li>Shuffle the 12 building cards together (indicated by the building icon in the upper left corner) and place them face-down next to the <em>Junkyard</em> pile (they form a third pile of cards next to the <em>Junkyard</em> and <em>Contested Resources</em>.</li>
-                <li>Add the 3rd gang card (<em>Masons</em>) next to the other 2 gangs.</li>
-                <li>Players can now use the "special ability" from the <em>Toolkit</em> (since it works with buildings).</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="hq3" class="accordion rules">
-        <h3>HQ Module #3 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Set up the game just as you did for HQ Module #2.</li>
-                <li>Shuffle the tribal leader cards together and deal two, face-down, to each player.  From those two, each player keeps only 1 to represent their tribal leader (players may look at them to decide). The card is kept face-up in the player's play area for everyone to see. The other card is set aside and will not be used this game.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="hq4" class="accordion rules">
-        <h3>HQ Module #4 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Setup</strong>
-            <div>
-              <ul>
-                <li>Set up the game just as you did for HQ Module #3.</li>
-                <li>Add two new rules: 
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Other Changes</strong>
+                <div>
                   <ul>
-                    <li>A <em>Saboteur</em> may attack a building that is completed and disable it.</li>
-                    <li>A <em>Sniper Team</em> may attack a tribal leader, wounding him and removing his advantage until a <em>med</em> is applied to the leader to heal him.</li>
+                    <li>Eliminate all <em>Contested Resources</em> peeking.</li>
+                    <li>The number of tribe members a player brings to a skirmish is no longer relevant.</li>
+                    <li>Skirmishes must be won by 2.  If not, then it is a tie and the players place the <em>Contested Resource</em> on top of the <em>Junkyard</em> and then shuffle the <em>Junkyard</em>.</li>
                   </ul>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recon1" class="accordion rules">
-        <h3>Recon Module #1 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Overview</strong>
+          </div><!-- end 2pRules -->
+          <div id="hq1" class="accordion rules">
+            <h3>HQ Module #1 Rules</h3>
             <div>
-              Recon includes many mercenaries, several of which are designed to work together to produce a web of intelligence and deception.
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Add the stack of <em>Medic</em> cards alongside the other mercenary cards.</li>
+                    <li>Shuffle the 8 new <em>Junkyard</em> cards into the <em>Junkyard</em> deck. For now ignore the special ability of the <em>Toolkit</em>.</li>
+                    <li>Locate the <em>Gearheads</em> and <em>Pharmers</em>. Place them on the table next to the mercenary stacks.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="accordion">
-            <strong>Setup</strong>
+          </div><!-- end hq1 -->
+          <div id="hq2" class="accordion rules">
+            <h3>HQ Module #2 Rules</h3>
             <div>
-              <ul>
-                <li>Put the full stack of <em>Scouting Refugees</em> in play as a separate stack available for hire, but visually separate from the other mercenaries.</li>
-                <li>Select the <em>Spy</em> and 9 other mercenries available for hire for a total of 10 mercenary stacks, plus the <em>Scouting Refugees</em>.</li>
-                <li>Shuffle the 4 <em>Binoculars</em> into the <em>Junkyard</em>.</li>
-              </ul>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Set up the game just as you did for HQ Module #1.</li>
+                    <li>Add the stack of <em>Engineer</em> cards alongside the other mercenary cards.</li>
+                    <li>Shuffle the 12 building cards together (indicated by the building icon in the upper left corner) and place them face-down next to the <em>Junkyard</em> pile (they form a third pile of cards next to the <em>Junkyard</em> and <em>Contested Resources</em>.</li>
+                    <li>Add the 3rd gang card (<em>Masons</em>) next to the other 2 gangs.</li>
+                    <li>Players can now use the "special ability" from the <em>Toolkit</em> (since it works with buildings).</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recon2" class="accordion rules">
-        <h3>Recon Module #2 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Overview</strong>
+          </div><!-- end hq2 -->
+          <div id="hq3" class="accordion rules">
+            <h3>HQ Module #3 Rules</h3>
             <div>
-              This module introduces a couple of the deception elements of Recon.  The resolution of these cards during the skirmish can sometimes get confusing.  It is important to remember that resolution decisions happen in play order (starting with that round's <em>Initiator</em>) rather than in real-time.
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Set up the game just as you did for HQ Module #2.</li>
+                    <li>Shuffle the tribal leader cards together and deal two, face-down, to each player.  From those two, each player keeps only 1 to represent their tribal leader (players may look at them to decide). The card is kept face-up in the player's play area for everyone to see. The other card is set aside and will not be used this game.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="accordion">
-            <strong>Setup</strong>
+          </div><!-- end hq3 -->
+          <div id="hq4" class="accordion rules">
+            <h3>HQ Module #4 Rules</h3>
             <div>
-              <ul>
-                <li>Put the <em>Assassin</em>, <em>Guard</em>, <em>Provocateur</em>, and <em>Rogue</em> in play together as mercenaries available for hire.</li>
-                <li>Select 6 other mercenaries for a total of 10 stacks.</li>
-              </ul>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Set up the game just as you did for HQ Module #3.</li>
+                    <li>Add two new rules: 
+                      <ol>
+                        <li>A <em>Saboteur</em> may attack a building that is completed and disable it. If a building is disabled, its abilities cannot be used and cards cannot be added or removed from the building. To repair the building, a tribe member card must be played from the player's hand to work on the building and then immediately discarded.</li>
+                        <li>A <em>Sniper Team</em> may attack a tribal leader, wounding them and removing their advantage until a <em>med</em> is applied to the leader to heal them. </li>
+                      </ol>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recon3" class="accordion rules">
-        <h3>Recon Module #3 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Overview</strong>
+          </div><!-- end hq4 -->
+          <div id="recon1" class="accordion rules">
+            <h3>Recon Module #1 Rules</h3>
             <div>
-              This module introduces the remaining mercenaries from Recon as well as two new buildings.
+              <div class="accordion">
+                <strong>Module Overview</strong>
+                <div>
+                  Recon includes many mercenaries, several of which are designed to work together to produce a web of intelligence and deception.
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Put the full stack of <em>Scouting Refugees</em> in play as a separate stack available for hire, but visually separate from the other mercenaries.</li>
+                    <li>Select the <em>Spy</em> and 9 other mercenries available for hire for a total of 10 mercenary stacks, plus the <em>Scouting Refugees</em>.</li>
+                    <li>Shuffle the 4 <em>Binoculars</em> into the <em>Junkyard</em>.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Details</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>Spy (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Grants a <em>recon</em> action:
+                          <ul>
+                            <li>Peek at up to four cards from one player. Choose the player and the target (building, deck, hand, skirmish force).</li>
+                            <li>If there are more cards available than four, the spying player must select which cards to view in advance (randomly choosing those cards if needed).</li>
+                            <li>After completing your spying action, discard the <em>spy</em> and <em>draw</em> 1 card.</li>
+                          </ul>
+                        </li>
+                        <li>In a given round, you may use the standard actions or the spying action, but not both.</li>
+                        <li>The <em>Spy</em>'s action can be <em>canceled</em> (such as by a <em>Scouting Refugee</em>):
+                          <ul>
+                            <li>The card that cancels a <em>Spy</em> can be revealed from committed cards, hand, or <em>Bunker</em>, regardless of what was being spied upon.</li>
+                            <li>If a <em>Spy</em> is canceled, it is still discarded, and the <em>draw</em> of 1 is still performed by the spying player.</li>
+                          </ul>
+                        </li>
+                        <li>A <em>Spy</em> can be <em>Sniped</em>. Discard the <em>Spy</em> and <em>draw</em> 1 card.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Scouting Refugee (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Serves as a <em>Refugee</em> for any actions or game conditions that depend on a <em>refugee</em> card.</li>
+                        <li>Two basic uses:
+                          <ul>
+                            <li>Can modify another tribe member's actions, but cannot initate such actions.</li>
+                            <li>Alternatively, can be played to cancel a <em>recon</em> action (i.e. <em>Spy</em>, <em>Binoculars</em>, or <em>Scout Tower</em>) by alerting the tribe that the spying activity is occurring. If this special action is performed, discard the <em>Scouting Refugee</em> and <em>draw</em> one card from teh top of your deck.</li>
+                          </ul>
+                        </li>
+                        <li>A given <em>Scouting Refugee</em> can only cancel one action, after which it is discaded and then replaced (<em>draw</em> of 1).</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Binoculars (instant)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard actions:
+                          <ul>
+                            <li>Useful in hunting, <em>Binoculars</em> help you plan your actions.</li>
+                            <li>An instant action. Does not need to be equipped and thus does not count toward a tribe member's equipement limit of one.</li>
+                            <li>Cannot be discarded through a <em>disarm</em> action.</li>
+                          </ul>
+                        </li>
+                        <li>Special – grants a <em>recon</em> action:
+                          <ul>
+                            <li>Peek at the top card of every pile in play, returning each card ot the top of its respective pile.</li>
+                            <li>Only you may see cards as a result of your <em>recon</em> action. You may not share this information with any other player.</li>
+                            <li>Alternatively, the <em>Binoculars</em> can improve any <em>recon</em> action by an additional two cards. Thus, two <em>Binoculars</em> would allow you to see the top 3 cards of each pile, or a <em>Spy</em> with <em>Binoculars</em> would allow you to see up to 6 cards from one player.</li>
+                            <li>No tribe member is required in order to use the card in this way.</li>
+                            <li>This action cannot be interrupted by a <em>disarm</em> action, but it can be <em>canceled</em>.</li>
+                          </ul>
+                        </li>
+                        <li>In a given round, you may use the standard action or the <em>recon</em> action, but not both.</li>
+                        <li>As with any card, <em>Binoculars</em> are discarded after use.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="accordion">
-            <strong>Setup</strong>
+          </div><!-- end recon1 -->
+          <div id="recon2" class="accordion rules">
+            <h3>Recon Module #2 Rules</h3>
             <div>
-              <ul>
-                <li>Put the <em>Courier</em>, <em>Drill Sergeant</em>, <em>Scrappers</em>, and <em>Tinker</em> in play together as mercenaries available for hire.</li>
-                <li>Select 6 other mercenaries for a total of 10 stacks.</li>
-                <li>Add the <em>Schematics Pile</em> (from HQ) and the two new buildings (<em>Portable Decoys</em> and <em>Scout Tower</em>).</li>
-                <li>Finally, substitute <em>Hardy Scavengers</em> in place of the standard <em>Scavengers</em> during player setup.</li>
-              </ul>
+              <div class="accordion">
+                <strong>Module Overview</strong>
+                <div>
+                  This module introduces a couple of the deception elements of Recon.  The resolution of these cards during the skirmish can sometimes get confusing.  It is important to remember that resolution decisions happen in play order (starting with that round's <em>Initiator</em>) rather than in real-time.
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Put the <em>Assassin</em>, <em>Guard</em>, <em>Provocateur</em>, and <em>Rogue</em> in play together as mercenaries available for hire.</li>
+                    <li>Select 6 other mercenaries for a total of 10 stacks.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Details</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>Assassin (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Like the <em>Sniper Team</em>, this mercenary has the ability to <em>snipe</em> an opponent's tribe members during resource gathering or the skirmish.</li>
+                        <li>Unlike the <em>Sniper Team</em>, the <em>Assassin</em> is restricted to only attacking single-unit tribe members.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Guard (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>An inexpensive fighter, similar to a <em>Brawler</em>.</li>
+                        <li>Can be used to <em>cancel</em> any action outside of the skirmish that targets your card(s). Examples include <em>spying</em>, <em>sniping</em>, or <em>disarming</em> while you gather resources, attacks against your buildings, etc.</li>
+                        <li>If you do use a <em>Guard</em> for its cancel ability, discard it and <em>draw</em> a new card from the top of your deck.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Provocateur (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard <em>draw</em>/<em>fight</em> actions.</li>
+                        <li>Special – grants a special means of fighting through intimidation:
+                          <ul>
+                            <li>During your turn of the skirmish resolution phase, you may announce an intent to use the number of tribe members you brought to the skirmish as your <em>fight</em> score.</li>
+                            <li>Count the total size of your force (tribe members you brought, even if they are not fighters) ignoring any tools or other combat modifiers, but including leader and building abilities to increase the size of your force.</li>
+                            <li>Use the total force size as your <em>fight</em> score.</li>
+                            <li>If your <em>Provocateur</em> gets <em>sniped</em>, your <em>fight</em> socre reverts back to being calculated in the usual manner.</li>
+                            <li><em>The Gangster</em> leader ability does not count towards the <em>Provocateur</em> ability.</li>
+                          </ul>
+                        </li>
+                        <li>A player in later turn order can <em>snipe</em> a <em>Provocateur</em> in earlier turn order.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Rogue (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard <em>draw</em>/<em>fight</em> actions.</li>
+                        <li>Special – grants a special skirmish win condition:
+                          <ul>
+                            <li>If a skirmish ends with a tie for highest <em>fight</em> score, the first player in turn order with a <em>Rogue</em> in the skirmish automatically wins the <em>Contested Resource</em>.</li>
+                            <li>Only a tie for highest <em>fight</em> score is considered, not the number of tribe members. The <em>Rogue</em> ability constitutes a higher order of precedence than the number of tirbe members brought to the skirmish.</li>
+                            <li>It is not necessary that the player using the <em>Rogue</em> be involved in the tie. Any two players with identical <em>fight</em> scores trigger the potential for a <em>Rogue</em> win condition for any player in the skirmish. At this point, the number of tribe members in the skirmish is not relevant.</li>
+                            <li>Teh <em>Rogue</em>'s ability to steal the <em>Contested Resource</em> is passive; you do not need to give up the <em>Rogue</em>'s <em>fight</em> in order to steal it.</li>
+                          </ul>
+                        </li>
+                        <li>Your <em>Rogue</em> can be targed by a <em>snipe</em> action.</li>
+                        <li>Only the first <em>Rogue</em> action can be successful per round (resolved in turn order).</li>
+                        <li>A player in lower turn order can <em>snipe</em> a <em>Rogue</em> in higher turn order.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recon4" class="accordion rules">
-        <h3>Recon Module #4 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Overview</strong>
+          </div><!-- end recon2 -->
+          <div id="recon3" class="accordion rules">
+            <h3>Recon Module #3 Rules</h3>
             <div>
-              This module deals exclusively with the <em>Contested Resources</em> pile, and thus can easiy be combined with any other module.
+              <div class="accordion">
+                <strong>Module Overview</strong>
+                <div>
+                  This module introduces the remaining mercenaries from Recon as well as two new buildings.
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Put the <em>Courier</em>, <em>Drill Sergeant</em>, <em>Scrappers</em>, and <em>Tinker</em> in play together as mercenaries available for hire.</li>
+                    <li>Select 6 other mercenaries for a total of 10 stacks.</li>
+                    <li>Add the <em>Schematics Pile</em> (from HQ) and the two new buildings (<em>Portable Decoys</em> and <em>Scout Tower</em>).</li>
+                    <li>Finally, substitute <em>Hardy Scavengers</em> in place of the standard <em>Scavengers</em> during player setup.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Details</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>Courier (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Has a powerful <em>draw</em> ability.</li>
+                        <li>When you perform a <em>draw</em> using a <em>Courier</em>, you must discard two of the drawn cards.</li>
+                        <li>Even if other cards are used to augment the <em>draw</em> ability, only two of the drawn cards must be discarded per <em>Courier</em> played.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Drill Sergeant (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard <em>dig</em>/<em>fight</em> actions.</li>
+                        <li>Special – retrieve two cards from the discard pile, shuffle them into your deck, and then draw the top two cards from your deck.</li>
+                        <li>This draw is distinct from the standard <em>draw</em> action.</li>
+                        <li>This draw is not modifiable.</li>
+                        <li>If you have no cards in your discard pile, you still draw two.</li>
+                        <li>If you have no cards in your deck, then both cards retreived from the discard pile will form your new deck.</li>
+                        <li>Using the <em>Drill Sergeant</em> in the skirmish will not permit you to add new cards to your skirmish force.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Hardy Scavenger (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Similar to a standard <em>Scavenger</em>, the <em>Hardy Scavenger</em> is a jack-of-all-trades, master-of-none. Unlike the standard unit, the <em>Hardy Scavenger</em> has 0 for <em>draw</em> and <em>fight</em>. Thus, modifers are required to make those actions useful.</li>
+                        <li>The <em>Hardy Scavenger</em> has a special ability that triggers only at the end of a skirmish in which the player does not win.  If you send a <em>Hardy Scavenger</em> into the skirmish and you either lose or tie, then any <em>Hardy Scavengers</em> you sent are returned to your hand at the end of the round.</li>
+                        <li>Even if one or more <em>Hardy Scavengers</em> return to your hand, you still perform a standard <em>draw</em> action at the start of the next round.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Scrappers (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>When you perform a <em>dig</em> action using <em>Scrappers</em>, you have choices to make:
+                          <ul>
+                            <li>You may perform your <em>dig</em> from the top or bottom of the pile.</li>
+                            <li>When you return cards to the pile after digging, you may choose to return cards to the top or bottom of the pile.</li>
+                          </ul>
+                        </li>
+                        <li>You still only retrieve one card from the set of cards you collect.</li>
+                        <li>When you return cards, you may choose to return some to the top and others to the bottom.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Tinker (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>A lighter-weight version of the <em>Engineer</em>.</li>
+                        <li>The <em>tinker</em> permits you to <em>dig</em> in the <em>Engineering Schematics</em> pile. However, with only a digging modifier, you will need to pair up with another tribe member that has a base <em>dig</em> ability.</li>
+                        <li>Any tribe member with a base <em>dig</em> ability (even a standard <em>Refugee</em>) can team up with a <em>Tinker</em> to <em>dig</em> in the <em>Engineering Schematics</em> pile.</li>
+                        <li><em>Tinkers</em> do not contribute to the tie breaker when competing for the <em>The Masons</em> gang (ties are broken by number of <em>Engineers</em>).</li>
+                        <li><strong>Note:</strong> when playing with the <em>Tinker</em>, you may find it helpful to add in the <em>Toolkit</em> to the <em>Junkyard</em>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Portable Decoys (building)</strong>
+                    <div>
+                      <ul>
+                        <li>Increases the size of your force in the skirmish for the purpose of tie-breaking or leveraging special abilities.</li>
+                        <li>For every 2 cards you bring to the skirmish, increase the effective size of your skirmish force by 1 (round down, no half credit).</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Scout Tower (building)</strong>
+                    <div>
+                      <ul>
+                        <li>Discard 1 card to activate your tower.</li>
+                        <li>Select any two piles as your target.</li>
+                        <li>Peek at the first two cards for each target and return them in their original order.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="accordion">
-            <strong>Setup</strong>
+          </div><!-- end recon3 -->
+          <div id="recon4" class="accordion rules">
+            <h3>Recon Module #4 Rules</h3>
             <div>
-              <ul>
-                <li>Shuffle all 28 <em>Contested Resources</em> (the 14 original plus the 14 new in Recon) together into one draw pile; then, draw the top 14 and use those for the game.</li>
-                <li>Alternatively, choose 1 copy of each <em>Contested Resource</em> (7 from the base game and 7 from Recon).</li>
-              </ul>
+              <div class="accordion">
+                <strong>Module Overview</strong>
+                <div>
+                  This module deals exclusively with the <em>Contested Resources</em> pile, and thus can easiy be combined with any other module.
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Setup</strong>
+                <div>
+                  <ul>
+                    <li>Shuffle all 28 <em>Contested Resources</em> (the 14 original plus the 14 new in Recon) together into one draw pile; then, draw the top 14 and use those for the game.</li>
+                    <li>Alternatively, choose 1 copy of each <em>Contested Resource</em> (7 from the base game and 7 from Recon).</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Details</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>Cargo Sled (tool)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard <em>dig</em>/<em>hunt</em> actions.</li>
+                        <li>The special ability kicks in when digging. You have the option of keeping an additional tool or medicine from the set of cards you retrive from the <em>Junkyard</em>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Combat Medics (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Carries medicine like a <em>Medic</em>.</li>
+                        <li>Can save against a <em>snipe</em> attack and <em>fight</em> in the same round.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Demolition Team (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Standard <em>dig</em>/<em>fight</em> actions.</li>
+                        <li>Alternately, their special ability can be used to reset the build timer on one under-construction building. Afterwards, draw two cards.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Tear Gas (instant)</strong>
+                    <div>
+                      <ul>
+                        <li>Used only in the skirmish.</li>
+                        <li>This card's use is declared on your turn within the skirmish phase.</li>
+                        <li>It does not need to be equipped by a tribe member and cannot be disarmed.</li>
+                        <li>When a player uses <em>Tear Gas</em>, one opposing trib emember is targeted. The targeted tribe member's <em>fight</em> score (or <em>fight</em> modifier) is set to 0.</li>
+                        <li>This is not a <em>snipe</em> attack and thus cannot be blocked by a <em>save</em> action.</li>
+                        <li><em>Tear Gas</em> is not effective against a <em>Provocateur</em> (cumulative tribe member count is used).</li>
+                        <li><em>Tear Gas</em> can indirectly counter a <em>Rogue</em> by breaking tied skirmish.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Tribal Hunters (tribe member)</strong>
+                    <div>
+                      <ul>
+                        <li>Just like the <em>Tribe Family</em>, comes in a 2-prson, 3-person, and 4-person variety.</li>
+                        <li>Unlike the <em>Tribe Family</em>, these groups are dedicated hunters and have a minor <em>fight</em> strength.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recon5" class="accordion rules">
-        <h3>Recon Module #5 Details</h3>
-        <div>
-          <div class="accordion">
-            <strong>Overview</strong>
+          </div><!-- end recon4 -->
+          <div id="recon5" class="accordion rules">
+            <h3>Recon Module #5 Rules</h3>
             <div>
-              This module introduces the remaining content of the Recon expansion.
+              <div class="accordion">
+                <strong>Module Overview</strong>
+                <div>
+                  This module introduces the remaining content of the Recon expansion.
+                </div>
+              </div>
+              <div class="accordion">
+                <strong>Details</strong>
+                <div>
+                  <div class="accordion">
+                    <strong>Humanitarians (gang)</strong>
+                    <div>
+                      <ul>
+                        <li>Select a full stack of 20 <em>Refugee</em> cards and make them available for <em>hire</em> in addition to the 10 mercenary stacks you choose to select.</li>
+                        <li>Awarded based on the number of cards with the "<em>refugee</em>" keyword in the title (including those you start with, find in the <em>Junkyard</em>, and hire).</li>
+                        <li>There is no tie-breaker. In the event of a tie, this gang is not awarded.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>Map (instant)</strong>
+                    <div>
+                      <ul>
+                        <li>An instant action. Does not need to be equipped and thus does not count toward a tribe member's one-card equipment limit.</li>
+                        <li>Cannot be discarded through a <em>disarm</em> action.</li>
+                        <li>Play this card to retrieve a tribe member you have just used and apply them to another action this same round.</li>
+                        <li>Does not permit an action to be performed more than once.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>The Swindler (leader)</strong>
+                    <div>
+                      <ul>
+                        <li>Discard one <em>Refugee</em> card to reduce the cost of hiring by 1 food or discard 2 <em>Refugees</em> to reduce the cost of hiring by 1 medicine.</li>
+                        <li>This special action can only be performed once per turn.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion">
+                    <strong>The Yardmaster (leader)</strong>
+                    <div>
+                      <ul>
+                        <li>Once per round, you may peek at the top two cards of the <em>Junkyard</em>. Return both cards to the top or bottom of the pile (preserving the original card order).</li>
+                        <li>This action may be taken at any time during the round.</li>
+                        <li>This action cannot be canceled or otherwise interrupted.</li>
+                        <li>This action is not modifiable.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end output -->
-
+          </div><!-- end recon5 -->
+          <div id="variants" class="accordion rules">
+            <h3>Variants</h3>
+            <div>
+              <div id="leaderDrafting" class="accordion">
+                <strong>Leader Drafting</strong>
+                <div>
+                  To incorporate <em>leader</em> acquisition into the game and infuse more choice, this variant allows for drafting leaders during the game rather than at the beginning:
+                  <ul>
+                    <li>Shuffle all the <em>leader</em> cards together and create a new face-down pile next to the other piles.</li>
+                    <li>During the game, players may use the <em>hire</em> action to persuade a <em>leader</em> to join their tribe by bribing them with food: 
+                      <ul>
+                        <li>Food (from <em>hunting</em>, buildings, <em>leader</em> powers, etc.) is used to bribe new <em>leaders</em>. For each food generated, the player may draw 1 card from the top of the <em>leaders</em> pile.</li>
+                        <li>A player may not <em>hire</em> more than once per turn. Thus, if you <em>hire</em> a <em>leader</em>, you cannot <em>hire</em> a mercenary that same round.</li>
+                        <li>The player may take one of the <em>leader</em> cards drawn in this manner and return the others to the bottom of the pile.</li>
+                        <li>The <em>leader</em> card is then placed face-up in front of the player.</li>
+                        <li>All <em>leader</em> powers on this card are immediately in effect.</li>
+                        <li>Actions that permit peeking at a pile can target the <em>leaders</em> pile as well.</li>
+                      </ul>
+                    </li>
+                    <li>At any point during the game, a player may choose to perform this action, even if they have already taken a <em>leader</em>. When a new set of <em>leaders</em> is drawn in this manner, the player may choose to take one and replace their current <em>leader</em> (returning the rest to the bottom of the <em>leader</em> pile) or return all such cards to the bottom of the pile.</li>
+                  </ul>
+                </div>
+              </div>
+              <div id="startingHands" class="accordion">
+                <strong>Alternate Starting Hands</strong>
+                <div>
+                  For variety, you may want to experiment with different starting hands. Suggested substitutions are as follows:
+                  <ul>
+                    <li><em>Scouting Refugees</em> for <em>Refugees</em> (depending on what leaders you have, this can be challenging as you will find a large number of card modifiers rather than base abilities).</li>
+                    <li><em>Hardy Scavengers</em> for <em>Scavengers</em>.</li>
+                    <li><em>Guards</em> for <em>Brawlers</em>.</li>
+                  </ul>
+                  <div style="padding: 0.25em 0 0.5em;"><strong>Note:</strong> with the greater variety of mercenaries offered through the Recon expansion, it is recommended that you not include any mercenaries for hire that are part of the players' starting hands.</div>
+                </div>
+              </div>
+            </div>
+          </div><!-- end variants -->
+        </div><!-- end rules -->
+      </div><!-- end output -->
+    </div><!-- end content -->
   </div><!-- end container -->
-
 </body>
 
 </html>

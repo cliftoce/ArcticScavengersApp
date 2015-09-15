@@ -1,5 +1,5 @@
 /**
- * Reset some basic elements
+ * Reset basic elements
  */
 body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
@@ -23,48 +23,14 @@ body {
 }
 
 /**
-* Center content on page
-*/
-#container {
-	margin: 0 auto;
-	max-width: 960px;
-	text-align: left;
-	padding: 10px;
-	background-color: #CCFFFF;
-	border: 1px solid black; border-top: none;
-}
-
-/**
- * Set 'margin-bottom' to maintain vertical rhythm
- */
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-ul, ol, dl, figure,
-.highlight {
-  margin-bottom: 1em; 
-}
-
-/**
  * Lists
  */
 ul, ol {
-  margin-left: 30px; 
-}
-
-li > ul, li > ol {
-  margin-bottom: 0;
+  margin-left: 1.8em;
 }
 
 li {
-  padding: 0.25em 0;
-}
-
-li:first-child {
-  padding-top: 0.5em;
-}
-
-li:last-child {
-  padding-bottom: 0;
+  margin: 0.5em 0;
 }
 
 /**
@@ -75,26 +41,52 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
-
 /**
-* Layout
+* Layout and appearance
 */
-
+#container {
+  margin: 0 auto;
+  max-width: 960px;
+  border: 1px solid black; border-top: none;
+}
+#header {
+  margin: 0 auto;
+  max-width: 960px;
+  text-align: center;
+  text-shadow: 0.05em 0.05em #AEE1E1;
+  padding: 1em;
+  border-bottom: 1px solid black;
+  background: #80CACA;
+}
+#content {
+  text-align: left;
+  background: #AEE1E1;
+}
+#input {
+  padding: 1em;
+}
+#output {
+  padding: 1em;
+  border-top: 1px solid black;
+}
 .optionSelection {
-  padding: 1em 0;
+  padding-top: 1em;
   clear: both;
 }
-
 .expansionSelection, #gameMode, #numPlayers {
   padding-bottom: 0.5em;
 }
-
+.bubble {
+  background: #FFF;
+  border-radius: 0.25em;
+  padding: 1em;
+  margin: 1em 0;
+  box-shadow: 0.3em 0.3em 0.5em #80CACA;
+}
 
 /**
 * Page size adjustments
 */
-
 @media (min-width: 720px) {
   .expansionSelection {
     display: inline-block;
@@ -107,7 +99,6 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 }
-
 @media (max-width: 720px) {
   .widescreen {
     display: none;
@@ -118,14 +109,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
-
-
-
 /**
 * Slider toggle
 */
-
 .switch {
   position: relative;
   display: inline-block;
@@ -142,14 +128,12 @@ h1, h2, h3, h4, h5, h6 {
   background-image: -o-linear-gradient(top, #eeeeee, white 1.25em);
   background-image: linear-gradient(to bottom, #eeeeee, white 1.25em);
 }
-
 .switch-input {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
-
 .switch-label {
   position: relative;
   display: block;
@@ -201,7 +185,6 @@ h1, h2, h3, h4, h5, h6 {
 .switch-input:checked ~ .switch-label:after {
   opacity: 1;
 }
-
 .switch-handle {
   position: absolute;
   top: 0.2em;
