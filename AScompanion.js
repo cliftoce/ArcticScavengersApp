@@ -6,7 +6,7 @@ $(document).ready( function () {
 	updateAvailableModes();
 
 	$('.accordion').accordion({ 
-		animate: 200, // animation duration (ms)
+		animate: 100, // animation duration (ms)
     	active: false,
 		collapsible: true,
 		heightStyle: "content"
