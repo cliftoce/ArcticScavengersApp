@@ -6,9 +6,11 @@ $(document).ready( function () {
 	updateAvailableModes();
 
 	$('.accordion').accordion({ 
-		active: false,
+		animate: 200, // animation duration (ms)
+    	active: false,
 		collapsible: true,
 		heightStyle: "content"
+
 	});
 
 	$('form#moduleSelection input').each(function() {
