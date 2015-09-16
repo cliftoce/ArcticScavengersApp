@@ -38,7 +38,9 @@ $(document).ready( function () {
 			'recon4': ['Recon Module #4: "Randomized Contested Resources"',[]],
 			'recon5': ['Recon Module #5: "The Kitchen Sink"',[]]
 		}
-		if (mode !== '-') {
+		if (mode === '-') {
+			$('#selectedMode, #randomMercs').hide();
+		} else {
 			$('#selectedMode').show().html(Modules[mode][0] + ( players === '-' ? '' : ' for ' + players + ( players === '1' ? ' player.' : ' players.' )));
 		    $('#randomMercs').show().html('<strong>Mercenaries: </strong>' + randomizeMercs(Modules[mode][1]).sort().join(', ') + '.');
 		}
